@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "@iconify/react": "^4.1.0",
+    "@lottiefiles/react-lottie-player": "^3.5.3",
     "@netlify/classnames-template-literals": "^1.0.3",
     "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
+    "contentful": "^10.2.0",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "next": "13.4.1",

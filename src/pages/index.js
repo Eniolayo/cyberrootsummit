@@ -2,24 +2,34 @@ import React from "react";
 import Image from "next/image";
 import Head from "next/head";
 import { Icon } from "@iconify/react";
-import {
-  IntroContent,
-  AboutUs,
-  Ads,
-  Expertise,
-  Objectives,
-  Services,
-  Partners,
-  Blog,
-  Newsletter,
-  Events,
-} from "@/components/Home";
+import { IntroContent } from "@/components/Home";
+import axios from "axios";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import UseShowTopBtn from "@/utils/useShowTopBtn";
+import ctl from "@netlify/classnames-template-literals";
+import { Heading } from "@/components/ui";
+const contentful = require("contentful");
 
-export default function Home() {
+const client = contentful.createClient({
+  space: process.env.NEXT_PUBLIC_SPACE,
+  environment: process.env.NEXT_PUBLIC_ENVIRONMENT,
+  accessToken: process.env.NEXT_PUBLIC_ACCESSTOKEN,
+});
+
+export default function Home({ posts }) {
   const [showTopBtn, setShowTopBtn] = UseShowTopBtn();
+  console.log(posts, "postss");
+  // React.useEffect(() => {
+  //   const contentType = "summit";
+  //   const filterParameters = "fields.eventName=testing";
+  //   // const filterParameters = "fields.eventName=2022Hackaton";
+  //   async function hill(params) {
+  //     const data = await fetchContentfulData(contentType, filterParameters);
+  //     console.log(data);
+  //   }
+  //   hill();
+  // }, []);
 
   return (
     <>
@@ -46,7 +56,7 @@ export default function Home() {
 function ExampleEvents() {
   return (
     <>
-      <div className="flex gap-10 [&>*:nth-child(1)]:w-[40%] [&>*:nth-child(2)]:flex-1">
+      <div className={gridEventWrapper}>
         <div className="bg-summit-bg rounded-md overflow-hidden text-white bg-no-repeat bg-cover text-left py-10 px-5">
           <h5 className="uppercase font-bold text-2xl">cybersummit 2023</h5>
           <h6 className="text-lg">10-09-2023</h6>
@@ -73,11 +83,14 @@ function ExampleEvents() {
             Register for free
           </button>
         </div>
-      </div>
-      <div className="flex gap-10 [&>*:nth-child(2)]:w-[40%] [&>*:nth-child(1)]:flex-1">
         <div className="bg-demo-summit-bg2 rounded-md overflow-hidden text-white bg-no-repeat bg-cover text-left py-10 px-5">
-          <h5 className="uppercase font-bold text-2xl">cybersummit 2023</h5>
-          <h6 className="text-lg">10-09-2023</h6>
+          <Heading variant={"m"} level={"h5"}>
+            cybersummit 2023
+          </Heading>
+          <Heading variant={"s"} level={"h6"}>
+            10-09-2023
+          </Heading>
+
           <p className="text-sm max-w-[280px] py-7">
             Small businesses are often targets for cyber-attacks because they
             are perceived as easy targets. A cybersecurity event designed for
@@ -105,3 +118,47 @@ function ExampleEvents() {
     </>
   );
 }
+
+const fetchContentfulData = async (contentType, filterParameters) => {
+  const spaceId = process.env.NEXT_PUBLIC_SPACE;
+  const environmentId = process.env.NEXT_PUBLIC_ENVIRONMENT;
+  const accessToken = process.env.NEXT_PUBLIC_ACCESSTOKEN;
+
+  const url = `https://cdn.contentful.com/spaces/${spaceId}/environments/${environmentId}/entries?content_type=${contentType}&${filterParameters}`;
+
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching Contentful data:", error);
+    return null;
+  }
+};
+export async function getStaticProps() {
+  const res = await client.getEntries({
+    content_type: "summit",
+  });
+  const posts = await res.items;
+  return {
+    props: { posts },
+  };
+}
+const gridEventWrapper = ctl(`
+  grid 
+  gap-5 
+  lg:gap-10 
+  grid-cols-7 
+  [&>*:nth-child(4n+1)]:col-span-full 
+  [&>*:nth-child(4n+4)]:col-span-full 
+  md:[&>*:nth-child(4n+1)]:col-span-3 
+  md:[&>*:nth-child(4n+4)]:col-span-3 
+  [&>*:nth-child(4n+2)]:col-span-full 
+  [&>*:nth-child(4n+3)]:col-span-full
+  md:[&>*:nth-child(4n+2)]:col-span-4 
+  md:[&>*:nth-child(4n+3)]:col-span-4
+`);
