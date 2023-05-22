@@ -1,10 +1,11 @@
-import React from "react";
-import Image from "next/image";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
 import ctl from "@netlify/classnames-template-literals";
-import { Heading } from "@/components/ui";
+import Image from "next/image";
+import React from "react";
+
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 import Modal from "@/components/modal";
+import { Heading } from "@/components/ui";
 
 function Summitgallery() {
   const [firstOpen, setfirstOpen] = React.useState(true);

@@ -1,9 +1,11 @@
-import React from "react";
-import { IntroContent } from "@/components/Home";
 import Image from "next/image";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import Link from "next/link";
+import React from "react";
+
 import ExpertAdvice from "@/components/expertadvice";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
+import { IntroContent } from "@/components/Home";
 
 function Events() {
   return (
@@ -12,6 +14,20 @@ function Events() {
       <IntroContent />
       <AboutEvent />
       <SpeakerSection />
+      <section className="mb-6 flex">
+        <Link
+          href={"/gallery/410035131092506500000"}
+          className="text-center w-fit mx-auto block border border-brightNavyBlue text-brightNavyBlue px-6 py-3 rounded-m"
+        >
+          View Gallery
+        </Link>
+        <Link
+          href={"/events/register/410035131092506500000"}
+          className="text-center w-fit mx-auto block border border-brightNavyBlue text-brightNavyBlue px-6 py-3 rounded-m"
+        >
+          Register For Event
+        </Link>
+      </section>
       <ExpertAdvice />
       <section className="bg-brightNavyBlue py-10 space-y-5 mt-6 text-white">
         <h3 className="text-center font-bold text-4xl">Sponsors</h3>
@@ -54,7 +70,7 @@ function SpeakerSection() {
       <h3 className="capitalize text-brightNavyBlue text-center font-black text-4xl">
         speakers
       </h3>
-      <div className="flex justify-center gap-10">
+      <div className="flex flex-wrap justify-center gap-10">
         {Speakers()}
         {Speakers()}
         {Speakers()}
@@ -80,7 +96,7 @@ function AboutEvent() {
       <h3 className="capitalize text-brightNavyBlue text-center font-black text-4xl">
         About the event
       </h3>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col-reverse gap-10 lg:flex-row items-center justify-between">
         <div className="flex-1">
           <p className="font-light">November 12, 2023 @ 12.00pm - 5.00pm </p>
           <h4 className="text-4xl font-black">CYBERSUMMIT 2023 </h4>

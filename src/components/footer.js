@@ -1,7 +1,8 @@
-import Image from "next/image";
 import { Icon } from "@iconify/react";
-import { Heading } from "./ui";
+import Image from "next/image";
 import Link from "next/link";
+
+import { Heading } from "./ui";
 
 export default function Footer() {
   return (

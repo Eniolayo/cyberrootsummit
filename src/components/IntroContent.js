@@ -1,5 +1,5 @@
-import Image from "next/image";
 import ctl from "@netlify/classnames-template-literals";
+import Image from "next/image";
 
 export default function IntroContent() {
   return (

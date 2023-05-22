@@ -1,7 +1,7 @@
-import React from "react";
+import ctl from "@netlify/classnames-template-literals";
 import Image from "next/image";
 import Link from "next/link";
-import ctl from "@netlify/classnames-template-literals";
+import React from "react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -18,16 +18,14 @@ export default function Header() {
         </Link>
         <div className={HeaderLinkStyle(isOpen)}>
           <ul className={HeaderWrapperLinkStyle}>
-            {["webinars", "workshops", "seminars", "conferences"].map(
-              (item) => (
-                <li
-                  className="text-base m:text-lg lg:text-xl text-white m:text-black capitalize"
-                  key={item}
-                >
-                  <Link href={"/" + item}>{item}</Link>
-                </li>
-              )
-            )}
+            {["webinars", "seminars", "conferences", "gallery"].map((item) => (
+              <li
+                className="text-base m:text-lg lg:text-xl text-white m:text-black capitalize"
+                key={item}
+              >
+                <Link href={"/" + item}>{item}</Link>
+              </li>
+            ))}
           </ul>
           <Link
             href={"/contact-us"}

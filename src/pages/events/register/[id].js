@@ -1,8 +1,9 @@
+import ctl from "@netlify/classnames-template-literals";
+import React from "react";
+
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { Button, Heading, Text } from "@/components/ui";
-import ctl from "@netlify/classnames-template-literals";
-import React from "react";
 
 export default function EventId() {
   return (

@@ -1,14 +1,14 @@
-import React from "react";
-import Image from "next/image";
-import Head from "next/head";
-import { Icon } from "@iconify/react";
-import { IntroContent } from "@/components/Home";
-import axios from "axios";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
-import UseShowTopBtn from "@/utils/useShowTopBtn";
 import ctl from "@netlify/classnames-template-literals";
+import axios from "axios";
+import Head from "next/head";
+import Link from "next/link";
+import React from "react";
+
+import Footer from "@/components/footer";
+import Header from "@/components/header";
+import { IntroContent } from "@/components/Home";
 import { Heading } from "@/components/ui";
+import UseShowTopBtn from "@/utils/useShowTopBtn";
 const contentful = require("contentful");
 
 const client = contentful.createClient({
@@ -57,63 +57,30 @@ function ExampleEvents() {
   return (
     <>
       <div className={gridEventWrapper}>
-        <div className="bg-summit-bg rounded-md overflow-hidden text-white bg-no-repeat bg-cover text-left py-10 px-5">
-          <h5 className="uppercase font-bold text-2xl">cybersummit 2023</h5>
-          <h6 className="text-lg">10-09-2023</h6>
-          <p className="text-sm max-w-[280px] py-7">
-            Small businesses are often targets for cyber-attacks because they
-            are perceived as easy targets. A cybersecurity event designed for
-            small business owners and employees can cover topics like risk
-            management,
-          </p>
-          <button className="border border-white text-base rounded-lg px-2 py-1">
-            Register for free
-          </button>
-        </div>
-        <div className="bg-demo-summit-bg1 rounded-md overflow-hidden text-white bg-no-repeat bg-cover text-left py-10 px-5">
-          <h5 className="uppercase font-bold text-2xl">cybersummit 2023</h5>
-          <h6 className="text-lg">10-09-2023</h6>
-          <p className="text-sm max-w-[280px] py-7">
-            Small businesses are often targets for cyber-attacks because they
-            are perceived as easy targets. A cybersecurity event designed for
-            small business owners and employees can cover topics like risk
-            management,
-          </p>
-          <button className="border border-white text-base rounded-lg px-2 py-1">
-            Register for free
-          </button>
-        </div>
-        <div className="bg-demo-summit-bg2 rounded-md overflow-hidden text-white bg-no-repeat bg-cover text-left py-10 px-5">
-          <Heading variant={"m"} level={"h5"}>
-            cybersummit 2023
-          </Heading>
-          <Heading variant={"s"} level={"h6"}>
-            10-09-2023
-          </Heading>
-
-          <p className="text-sm max-w-[280px] py-7">
-            Small businesses are often targets for cyber-attacks because they
-            are perceived as easy targets. A cybersecurity event designed for
-            small business owners and employees can cover topics like risk
-            management,
-          </p>
-          <button className="border border-white text-base rounded-lg px-2 py-1">
-            Register for free
-          </button>
-        </div>
-        <div className="bg-demo-summit-bg3 rounded-md overflow-hidden text-white bg-no-repeat bg-cover text-left py-10 px-5">
-          <h5 className="uppercase font-bold text-2xl">cybersummit 2023</h5>
-          <h6 className="text-lg">10-09-2023</h6>
-          <p className="text-sm max-w-[280px] py-7">
-            Small businesses are often targets for cyber-attacks because they
-            are perceived as easy targets. A cybersecurity event designed for
-            small business owners and employees can cover topics like risk
-            management,
-          </p>
-          <button className="border border-white text-base rounded-lg px-2 py-1">
-            Register for free
-          </button>
-        </div>
+        {[
+          "bg-summit-bg",
+          "bg-demo-summit-bg1",
+          "bg-demo-summit-bg2",
+          "bg-demo-summit-bg3",
+        ].map((item) => (
+          <Link
+            href="/events/7814403220567356"
+            className={`${item} rounded-md block overflow-hidden text-white bg-no-repeat bg-cover text-left py-10 px-5`}
+            key={item}
+          >
+            <h5 className="uppercase font-bold text-2xl">cybersummit 2023</h5>
+            <h6 className="text-lg">10-09-2023</h6>
+            <p className="text-sm max-w-[280px] py-7">
+              Small businesses are often targets for cyber-attacks because they
+              are perceived as easy targets. A cybersecurity event designed for
+              small business owners and employees can cover topics like risk
+              management,
+            </p>
+            {/* <button className="border border-white text-base rounded-lg px-2 py-1">
+              Register for free
+            </button> */}
+          </Link>
+        ))}
       </div>
     </>
   );
@@ -153,12 +120,16 @@ const gridEventWrapper = ctl(`
   gap-5 
   lg:gap-10 
   grid-cols-7 
+  
   [&>*:nth-child(4n+1)]:col-span-full 
   [&>*:nth-child(4n+4)]:col-span-full 
+
   md:[&>*:nth-child(4n+1)]:col-span-3 
   md:[&>*:nth-child(4n+4)]:col-span-3 
+  
   [&>*:nth-child(4n+2)]:col-span-full 
   [&>*:nth-child(4n+3)]:col-span-full
+  
   md:[&>*:nth-child(4n+2)]:col-span-4 
   md:[&>*:nth-child(4n+3)]:col-span-4
 `);
