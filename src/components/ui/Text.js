@@ -1,5 +1,5 @@
-import React from "react";
 import ctl from "@netlify/classnames-template-literals";
+import React from "react";
 
 export default function Text({
   children,
