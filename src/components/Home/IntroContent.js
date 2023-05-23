@@ -1,7 +1,7 @@
 import ctl from "@netlify/classnames-template-literals";
 import Image from "next/image";
 
-export default function IntroContent({ Heading, subHeading }) {
+export default function IntroContent({ Heading, subHeading, desc }) {
   return (
     <section className="bg-cyber-summit-bg bg-cover bg-no-repeat py-5 grid items-center justify-center min-h-[550px]">
       <div className="grid items-center h-full text-white content-center gap-5 [&>*]:mx-auto [&>*]:text-center w-[90%] mx-auto">
@@ -10,8 +10,8 @@ export default function IntroContent({ Heading, subHeading }) {
           {subHeading || "Social Engineering Awareness"}
         </h5>
         <p className="max-w-[700px] text-xl">
-          Small businesses are often targets for cyber-attacks because they are
-          perceived as easy targets. A cybersecurity event desig...
+          {desc ||
+            "Welcome to our Summit Event page! Discover a world of knowledge, inspiration, and networking opportunities as we bring together industry leaders, innovators, and visionaries at our Summit."}
         </p>
         {/* <button className="px-12 py-3 capitalize rounded-m text-xl bg-brightNavyBlue text-white block">
           View summit

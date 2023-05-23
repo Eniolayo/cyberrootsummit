@@ -41,6 +41,7 @@ export default function Events({ postRes }) {
         }}
         startTime={convertTime(postRes.fields.dateAndTime.slice(11, 16))}
         endTime={convertTime(postRes.fields.endDateAndTime.slice(11, 16))}
+        eventImage={postRes.fields.eventImage.fields.file.url.slice(2)}
       />
       <SpeakerSection data={postRes.fields.speakers} />
       <section className="mb-6 flex">

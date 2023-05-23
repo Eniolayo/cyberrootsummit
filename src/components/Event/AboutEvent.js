@@ -10,6 +10,7 @@ export default function AboutEvent({
   title,
   location,
   description,
+  eventImage,
 }) {
   const addLineBreaks = (text) => {
     return text.replace(/\n/g, "<br/>");
@@ -34,9 +35,10 @@ export default function AboutEvent({
         <div className="flex-1">
           <div className={ImageSectionWrapperStyle}>
             <Image
-              src="/man-in-showing-expertise.png"
+              src={"http://" + eventImage}
               alt="man-in-showing-expertise"
               fill
+              className=" rounded-br-large "
             />
           </div>
         </div>
