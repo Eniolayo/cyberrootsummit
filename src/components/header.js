@@ -18,12 +18,16 @@ export default function Header() {
         </Link>
         <div className={HeaderLinkStyle(isOpen)}>
           <ul className={HeaderWrapperLinkStyle}>
-            {["training", "blog", "gallery"].map((item) => (
+            {[
+              { name: "training", url: "/training" },
+              { name: "blog", url: "https://cyber-root.vercel.app/blog" },
+              { name: "gallery", url: "/gallery" },
+            ].map((item) => (
               <li
                 className="text-base m:text-lg lg:text-xl text-white m:text-black capitalize"
-                key={item}
+                key={item.name}
               >
-                <Link href={"/" + item}>{item}</Link>
+                <Link href={item.url}>{item.name}</Link>
               </li>
             ))}
           </ul>

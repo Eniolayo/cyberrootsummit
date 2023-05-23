@@ -1,6 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 
-import { Button, Heading } from "./ui";
+import { Heading } from "./ui";
 
 export default function ExpertAdvice() {
   return (
@@ -15,9 +16,12 @@ export default function ExpertAdvice() {
             Protect your digital assets with our advanced cybersecurity
             solutions.
           </Heading>
-          <Button variant={"tertiary"} style={"px-5 py-4"}>
+          <Link
+            href="/contact-us"
+            className="text-brightNavyBlue bg-white text-base m:text-lg lg:text-xl rounded-md px-5 py-4"
+          >
             Get Expert Advice
-          </Button>
+          </Link>
         </div>
         <div className="relative lg:absolute right-0 mt-3 lg:mt-0 w-full lg:w-[50%] h-[800px] lg:h-[400px]">
           <Image

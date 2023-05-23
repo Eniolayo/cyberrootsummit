@@ -34,6 +34,12 @@ function TextStyle(variant, styles) {
             m:text-sm 
             ${styles}
         `);
+    case "s":
+      return ctl(`
+            text-sm 
+            m:text-base 
+            ${styles}
+        `);
 
     case "md":
       return ctl(`
