@@ -1,19 +1,25 @@
 import Image from "next/image";
 
+import { Button, Heading } from "./ui";
+
 export default function ExpertAdvice() {
   return (
-    <section className="bg-brightNavyBlue relative  h-[400px]">
-      <div className="w-[92%] max-w-[1500px] mx-auto flex h-full justify-between flex-1">
+    <section className="bg-brightNavyBlue relative  h-[600px] lg:h-[400px]">
+      <div className="w-[92%] max-w-[1500px] mx-auto flex flex-col-reverse lg:flex-row h-full justify-between flex-1">
         <div className="h-full grid content-center justify-items-start gap-8">
-          <h4 className="capitalize text-3xl max-w-[500px] text-white">
+          <Heading
+            level={"h4"}
+            variant={"md"}
+            styles={"max-w-[500px] text-white"}
+          >
             Protect your digital assets with our advanced cybersecurity
             solutions.
-          </h4>
-          <button className="text-brightNavyBlue bg-white px-5 py-4 rounded-md">
+          </Heading>
+          <Button variant={"tertiary"} style={"px-5 py-4"}>
             Get Expert Advice
-          </button>
+          </Button>
         </div>
-        <div className="absolute right-0 w-[50%] h-[400px]">
+        <div className="relative lg:absolute right-0 mt-3 lg:mt-0 w-full lg:w-[50%] h-[800px] lg:h-[400px]">
           <Image
             src="/expert-advice-blog.png"
             alt="expert-advice-blog"

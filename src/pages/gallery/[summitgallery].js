@@ -6,9 +6,22 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Modal from "@/components/modal";
 import { Heading } from "@/components/ui";
+const contentful = require("contentful");
 
-function Summitgallery() {
-  const [firstOpen, setfirstOpen] = React.useState(true);
+const client = contentful.createClient({
+  space: process.env.NEXT_PUBLIC_SPACE,
+  environment: process.env.NEXT_PUBLIC_ENVIRONMENT,
+  accessToken: process.env.NEXT_PUBLIC_ACCESSTOKEN,
+});
+
+export default function Summitgallery({ postRes }) {
+  const [firstOpen, setfirstOpen] = React.useState(false);
+  console.log(postRes);
+  const eventMonth = new Date(postRes.fields.dateAndTime).getMonth();
+  const eventDay = new Date(postRes.fields.dateAndTime).getDay();
+  const eventYear = new Date(postRes.fields.dateAndTime).getFullYear();
+  const options = { month: "long" };
+
   return (
     <div>
       <Header />
@@ -19,14 +32,17 @@ function Summitgallery() {
       </section>
       <section className="text-center max-w-[1500px] w-[92%] mx-auto py-8 space-y-3">
         <Heading level={"h3"} variant={"3xl"} styles={"font-black capitalize"}>
-          Cybersummit 2023
+          {postRes.fields.eventName}
         </Heading>
-        <h5 className="text-xl text-gray">January 1, 2023</h5>
+        <h5 className="text-xl text-gray">
+          {new Intl.DateTimeFormat("en-US", options).format(eventMonth)}{" "}
+          {eventDay}, {eventYear}
+        </h5>
         <p className="capitalize text-[23px]">
-          Welcome to our CYBER SUMMIT 2022 Gallery page! Browse our gallery of
-          exciting photos and videos featuring expert keynote speakers, engaging
-          panel discussions, workshops, and networking sessions connecting
-          professionals in their field.
+          Welcome to our {postRes.fields.eventName} Gallery page! Browse our
+          gallery of exciting photos and videos featuring expert keynote
+          speakers, engaging panel discussions, workshops, and networking
+          sessions connecting professionals in their field.
         </p>
       </section>
       <section className="w-[92%] max-w-[1500px] mx-auto py-12 grid grid-cols-[repeat(auto-fit,_minmax(270px,_1fr))] justify-between gap-5">
@@ -62,4 +78,29 @@ const mainSectionTextStyle = ctl(`
   font-black
   capitalize
 `);
-export default Summitgallery;
+export async function getStaticPaths() {
+  const res = await client.getEntries({
+    content_type: "summit",
+  });
+  const posts = await res.items;
+
+  const paths = posts.map((item) => {
+    return {
+      params: { summitgallery: `${item.sys.id}` },
+    };
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const currentUrl = params.summitgallery;
+
+  const postRes = await client.getEntry(currentUrl);
+  return {
+    props: { postRes },
+  };
+}

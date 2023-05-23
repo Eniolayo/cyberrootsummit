@@ -64,7 +64,7 @@ function ExampleEvents() {
           "bg-demo-summit-bg3",
         ].map((item) => (
           <Link
-            href="/events/7814403220567356"
+            href="/events/1pTFVCZgEXLzdaeK22E5NE"
             className={`${item} rounded-md block overflow-hidden text-white bg-no-repeat bg-cover text-left py-10 px-5`}
             key={item}
           >

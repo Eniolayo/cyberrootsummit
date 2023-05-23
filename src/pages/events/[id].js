@@ -1,28 +1,39 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+const contentful = require("contentful");
+
+import ctl from "@netlify/classnames-template-literals";
 
 import ExpertAdvice from "@/components/expertadvice";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { IntroContent } from "@/components/Home";
 
-function Events() {
+const client = contentful.createClient({
+  space: process.env.NEXT_PUBLIC_SPACE,
+  environment: process.env.NEXT_PUBLIC_ENVIRONMENT,
+  accessToken: process.env.NEXT_PUBLIC_ACCESSTOKEN,
+});
+
+export default function Events({ postRes }) {
+  console.log(postRes, "postRes");
+
   return (
     <div>
       <Header />
-      <IntroContent />
+      <IntroContent Heading={postRes.fields.eventName} />
       <AboutEvent />
-      <SpeakerSection />
+      <SpeakerSection data={postRes.fields.speakers} />
       <section className="mb-6 flex">
         <Link
-          href={"/gallery/410035131092506500000"}
+          href={"/gallery/1pTFVCZgEXLzdaeK22E5NE"}
           className="text-center w-fit mx-auto block border border-brightNavyBlue text-brightNavyBlue px-6 py-3 rounded-m"
         >
           View Gallery
         </Link>
         <Link
-          href={"/events/register/410035131092506500000"}
+          href={"/events/register/1pTFVCZgEXLzdaeK22E5NE"}
           className="text-center w-fit mx-auto block border border-brightNavyBlue text-brightNavyBlue px-6 py-3 rounded-m"
         >
           Register For Event
@@ -64,27 +75,32 @@ function Events() {
     </div>
   );
 }
-function SpeakerSection() {
+function SpeakerSection({ data = [] }) {
   return (
     <section className="w-[92%] space-y-10 max-w-[1500px] mx-auto py-12 ">
       <h3 className="capitalize text-brightNavyBlue text-center font-black text-4xl">
         speakers
       </h3>
       <div className="flex flex-wrap justify-center gap-10">
-        {Speakers()}
-        {Speakers()}
-        {Speakers()}
+        {data.map((item, i) => (
+          <Speakers
+            key={i}
+            name={item.fields.name}
+            img={item.fields.speakerImage.fields.file.url.slice(2)}
+            title={item.fields.speakersTitle}
+          />
+        ))}
       </div>
     </section>
   );
-  function Speakers() {
+  function Speakers({ name, img, title }) {
     return (
       <div>
         <div className="relative w-[300px] h-[330px]">
-          <Image src="/demo-speaker.png" alt="demo-speaker" fill />
+          <Image src={"http://" + img} alt={title} fill />
         </div>
-        <h5 className="text-brightNavyBlue capitalize mt-4">john doe</h5>
-        <p className="capitalize text-xl italic">ceo blacksheep and co</p>
+        <h5 className="text-brightNavyBlue capitalize mt-4">{name}</h5>
+        <p className="capitalize text-xl italic">{title}</p>
       </div>
     );
   }
@@ -122,7 +138,7 @@ function AboutEvent() {
           </div>
         </div>
         <div className="flex-1">
-          <div className="relative w-[414px] before:block before:absolute before:bg-brightNavyBlue -translate-x-7 before:translate-x-7 before:translate-y-7 before:rounded-bl-large before:h-full before:w-full h-[322px] ml-auto">
+          <div className={ImageSectionWrapperStyle}>
             <Image
               src="/man-in-showing-expertise.png"
               alt="man-in-showing-expertise"
@@ -134,4 +150,48 @@ function AboutEvent() {
     </section>
   );
 }
-export default Events;
+
+export async function getStaticPaths() {
+  const res = await client.getEntries({
+    content_type: "summit",
+  });
+  const posts = await res.items;
+
+  const paths = posts.map((item) => {
+    return {
+      params: { id: `${item.sys.id}` },
+    };
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const currentUrl = params.id;
+
+  const postRes = await client.getEntry(currentUrl);
+  return {
+    props: { postRes },
+  };
+}
+
+const ImageSectionWrapperStyle = ctl(`
+  relative 
+  w-[300px] 
+  s:w-[414px] 
+  before:block 
+  before:absolute 
+  before:bg-brightNavyBlue 
+  translate-x-7 
+  before:-translate-x-7 
+  before:translate-y-7 
+  before:rounded-br-large 
+  before:h-full 
+  before:w-full 
+  h-[232px] 
+  s:h-[322px] 
+  ml-auto
+`);

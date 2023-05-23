@@ -18,7 +18,7 @@ export default function Header() {
         </Link>
         <div className={HeaderLinkStyle(isOpen)}>
           <ul className={HeaderWrapperLinkStyle}>
-            {["webinars", "seminars", "conferences", "gallery"].map((item) => (
+            {["training", "blog", "gallery"].map((item) => (
               <li
                 className="text-base m:text-lg lg:text-xl text-white m:text-black capitalize"
                 key={item}
@@ -127,7 +127,7 @@ const HeaderWrapperLinkStyle = ctl(`
   m:flex-row 
   items-start 
   m:items-center 
-  w-[50%] 
+  w-[40%] 
   gap-5 
   justify-between 
 `);
