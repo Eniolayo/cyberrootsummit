@@ -5,7 +5,7 @@ import React from "react";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Modal from "@/components/modal";
-import { Heading } from "@/components/ui";
+import { Heading, Text } from "@/components/ui";
 const contentful = require("contentful");
 
 const client = contentful.createClient({
@@ -17,10 +17,9 @@ const client = contentful.createClient({
 export default function Summitgallery({ postRes }) {
   const [firstOpen, setfirstOpen] = React.useState(false);
   console.log(postRes);
-  const eventMonth = new Date(postRes.fields.dateAndTime).getMonth();
-  const eventDay = new Date(postRes.fields.dateAndTime).getDay();
-  const eventYear = new Date(postRes.fields.dateAndTime).getFullYear();
-  const options = { month: "long" };
+  const eventDate = new Date(postRes.fields.dateAndTime);
+
+  const dateFormatter = new Intl.DateTimeFormat("en-US", { dateStyle: "full" });
 
   return (
     <div>
@@ -34,16 +33,13 @@ export default function Summitgallery({ postRes }) {
         <Heading level={"h3"} variant={"3xl"} styles={"font-black capitalize"}>
           {postRes.fields.eventName}
         </Heading>
-        <h5 className="text-xl text-gray">
-          {new Intl.DateTimeFormat("en-US", options).format(eventMonth)}{" "}
-          {eventDay}, {eventYear}
-        </h5>
-        <p className="capitalize text-[23px]">
+        <h5 className="text-xl text-gray">{dateFormatter.format(eventDate)}</h5>
+        <Text styles="capitalize" variant={"m"}>
           Welcome to our {postRes.fields.eventName} Gallery page! Browse our
           gallery of exciting photos and videos featuring expert keynote
           speakers, engaging panel discussions, workshops, and networking
           sessions connecting professionals in their field.
-        </p>
+        </Text>
       </section>
       <section className="w-[92%] max-w-[1500px] mx-auto py-12 grid grid-cols-[repeat(auto-fit,_minmax(270px,_1fr))] justify-between gap-5">
         {Array.from({ length: 20 }).map((_, i) => (

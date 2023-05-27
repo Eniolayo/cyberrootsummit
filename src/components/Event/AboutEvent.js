@@ -23,8 +23,7 @@ export default function AboutEvent({
       <div className="flex flex-col-reverse gap-10 lg:flex-row items-center justify-between">
         <div className="flex-1">
           <p className="font-light">
-            {date.eventMonth} {date.eventDay}, {date.eventYear} @ {startTime} -
-            {endTime}
+            {date} @ {startTime} - {endTime}
           </p>
           <h4 className="text-4xl font-black">{title}</h4>
           <p className="font-light">{location}</p>

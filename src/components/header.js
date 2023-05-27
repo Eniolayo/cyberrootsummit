@@ -20,7 +20,7 @@ export default function Header() {
           <ul className={HeaderWrapperLinkStyle}>
             {[
               { name: "training", url: "/training" },
-              { name: "blog", url: "https://cyber-root.vercel.app/blog" },
+              { name: "blog", url: "https://www.cyberrootltd.com/blog" },
               { name: "gallery", url: "/gallery" },
             ].map((item) => (
               <li
@@ -109,7 +109,7 @@ function HeaderLinkStyle(isOpen) {
         lg:w-[65%] 
         absolute 
         top-full 
-        p-10 
+        p-8 
         m:p-0 
         bg-cornflowerBlue 
         m:bg-transparent 

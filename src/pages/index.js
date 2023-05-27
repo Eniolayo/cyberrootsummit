@@ -7,14 +7,8 @@ import Header from "@/components/header";
 import { IntroContent } from "@/components/Home";
 import ExampleEvents from "@/components/Home/ExampleEvents";
 import { Heading } from "@/components/ui";
+import { client } from "@/utils";
 import UseShowTopBtn from "@/utils/useShowTopBtn";
-const contentful = require("contentful");
-
-const client = contentful.createClient({
-  space: process.env.NEXT_PUBLIC_SPACE,
-  environment: process.env.NEXT_PUBLIC_ENVIRONMENT,
-  accessToken: process.env.NEXT_PUBLIC_ACCESSTOKEN,
-});
 
 export default function Home({ posts }) {
   const [showTopBtn, setShowTopBtn] = UseShowTopBtn();

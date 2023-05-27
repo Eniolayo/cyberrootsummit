@@ -19,10 +19,9 @@ const client = contentful.createClient({
 
 export default function Events({ postRes }) {
   console.log(postRes, "postRes");
-  const eventMonth = new Date(postRes.fields.dateAndTime).getMonth();
-  const eventDay = new Date(postRes.fields.dateAndTime).getDay();
-  const eventYear = new Date(postRes.fields.dateAndTime).getFullYear();
-  const options = { month: "long" };
+  const eventDate = new Date(postRes.fields.dateAndTime);
+
+  const dateFormatter = new Intl.DateTimeFormat("en-US", { dateStyle: "full" });
 
   return (
     <div>
@@ -32,13 +31,7 @@ export default function Events({ postRes }) {
         title={postRes.fields.eventName}
         description={postRes.fields.description}
         location={postRes.fields.location}
-        date={{
-          eventDay,
-          eventMonth: new Intl.DateTimeFormat("en-US", options).format(
-            eventMonth
-          ),
-          eventYear,
-        }}
+        date={dateFormatter.format(eventDate)}
         startTime={convertTime(postRes.fields.dateAndTime.slice(11, 16))}
         endTime={convertTime(postRes.fields.endDateAndTime.slice(11, 16))}
         eventImage={postRes.fields.eventImage.fields.file.url.slice(2)}

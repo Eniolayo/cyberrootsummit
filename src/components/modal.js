@@ -1,3 +1,5 @@
+import { Icon } from "@iconify/react";
+import Image from "next/image";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
@@ -26,26 +28,37 @@ const Modal = ({ isOpen, onClose, images }) => {
   }
 
   return (
-    <div className="fixed inset-0 bg-black p-20 bg-opacity-30 text-white z-50">
-      <button
-        className="text-center bg-black p-5 block mx-auto font-black"
-        onClick={closeModal}
-      >
-        X
-      </button>
+    <div className="fixed inset-0 bg-black py-20 px-10 bg-opacity-70 text-white z-50">
+      <div className="flex justify-between items-center">
+        <button
+          className="border-2 border-black bg-white rounded-full p-2"
+          onClick={handlePrev}
+        >
+          <Icon icon="icon-park:left" className="text-2xl" />
+        </button>
+        <button
+          className="text-center bg-black border-2 border-white rounded-full p-3 block mx-auto font-black"
+          onClick={closeModal}
+        >
+          <Icon icon="iconoir:cancel" className="text-3xl" />
+        </button>
+        <button
+          className="border-2 border-black bg-white rounded-full p-2"
+          onClick={handlePrev}
+        >
+          <Icon icon="icon-park:right" className="text-2xl" />
+        </button>
+      </div>
       <div className="modal-container pt-6">
-        <div className="flex justify-between h-[70vh]">
-          <button className="modal-prev" onClick={handlePrev}>
-            Prev
-          </button>
-          <img
+        <div className="w-[90%] mx-auto relative max-w-[1000px] h-[70vh]">
+          <Image
             src={images[currentIndex]}
             alt={`Image ${currentIndex + 1}`}
-            className="h-[100%]"
+            fill
+            style={{
+              objectFit: "contain",
+            }}
           />
-          <button className="modal-next" onClick={handleNext}>
-            Next
-          </button>
         </div>
       </div>
     </div>
