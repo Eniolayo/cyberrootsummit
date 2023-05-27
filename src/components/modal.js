@@ -1,11 +1,9 @@
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 
 const Modal = ({ isOpen, onClose, images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
   const closeModal = () => {
     setCurrentIndex(0);
     onClose();
@@ -44,7 +42,7 @@ const Modal = ({ isOpen, onClose, images }) => {
         </button>
         <button
           className="border-2 border-black bg-white rounded-full p-2"
-          onClick={handlePrev}
+          onClick={handleNext}
         >
           <Icon icon="icon-park:right" className="text-2xl" />
         </button>
@@ -52,7 +50,7 @@ const Modal = ({ isOpen, onClose, images }) => {
       <div className="modal-container pt-6">
         <div className="w-[90%] mx-auto relative max-w-[1000px] h-[70vh]">
           <Image
-            src={images[currentIndex]}
+            src={"http://" + images[currentIndex].fields.file.url.slice(2)}
             alt={`Image ${currentIndex + 1}`}
             fill
             style={{

@@ -1,4 +1,5 @@
 import ctl from "@netlify/classnames-template-literals";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -7,6 +8,47 @@ export default function Header() {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
     <header className={HeaderStyle}>
+      <Head>
+        <title>Cyberroot</title>
+        <link
+          rel="icon"
+          href="https://res.cloudinary.com/duakn882p/image/upload/v1685193749/favicon_pfphf0.ico"
+        />
+        <meta property="og:title" content="CyberRoot || Cyber summit" />
+        <meta property="og:locale" content="en_US" />
+        <meta
+          property="og:site_name"
+          content="Cyber summit || Social Engineering Awareness"
+        />
+        <meta property="og:url" content="https://cyberrootsummit.vercel.app" />
+        <meta
+          property="og:description"
+          content="Welcome to our Summit Event page! Discover a world of knowledge, inspiration, and networking opportunities as we bring together industry leaders, innovators, and visionaries at our Summit."
+        />
+        <meta
+          property="og:image"
+          content="https://res.cloudinary.com/duakn882p/image/upload/v1685193749/favicon_pfphf0.ico"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta property="og:type" content="article" />
+        <meta property="article:section" content="Summit Event page" />
+
+        <meta property="twitter:card" content="Cyber summit" />
+        <meta property="twitter:title" content="Social Engineering Awareness" />
+        <meta
+          property="twitter:description"
+          content="Welcome to our Summit Event page! Discover a world of knowledge, inspiration, and networking opportunities as we bring together industry leaders, innovators, and visionaries at our Summit."
+        />
+        <meta
+          property="twitter:image"
+          content="https://res.cloudinary.com/duakn882p/image/upload/v1685193827/cyberrootIcon_1_ksnfya.png"
+        />
+        <meta
+          property="twitter:url"
+          content="https://cyberrootsummit.vercel.app"
+        />
+      </Head>
       <div className={HeaderWrapperStyle}>
         <Link href="/">
           <Image

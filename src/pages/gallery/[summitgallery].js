@@ -41,16 +41,16 @@ export default function Summitgallery({ postRes }) {
           sessions connecting professionals in their field.
         </Text>
       </section>
-      <section className="w-[92%] max-w-[1500px] mx-auto py-12 grid grid-cols-[repeat(auto-fit,_minmax(270px,_1fr))] justify-between gap-5">
-        {Array.from({ length: 20 }).map((_, i) => (
+      <section className={galleryDisplayStyle}>
+        {postRes.fields.summitPhotos.map((item) => (
           <div
             className="relative w-[270px] h-[210px] mx-auto cursor-pointer"
-            key={i}
+            key={item.sys.id}
             onClick={() => setfirstOpen(true)}
           >
             <Image
-              src="/gallery-summit-image.png"
-              alt="gallery-summit-image"
+              src={"http://" + item.fields.file.url.slice(2)}
+              alt={item.fields.title}
               fill
             />
           </div>
@@ -60,11 +60,7 @@ export default function Summitgallery({ postRes }) {
       <Modal
         onClose={() => setfirstOpen(false)}
         isOpen={firstOpen}
-        images={[
-          "https://images.unsplash.com/photo-1684183201449-1033b47827c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-          "https://images.unsplash.com/photo-1684265709063-2013faebdaeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOXx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-          "https://images.unsplash.com/photo-1684323730687-22830e382106?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        ]}
+        images={postRes.fields.summitPhotos}
       />
     </div>
   );
@@ -73,6 +69,16 @@ const mainSectionTextStyle = ctl(`
   text-7xl
   font-black
   capitalize
+`);
+const galleryDisplayStyle = ctl(`
+  w-[92%] 
+  max-w-[1500px] 
+  mx-auto 
+  py-12 
+  grid 
+  justify-between 
+  grid-cols-[repeat(auto-fit,_minmax(270px,_1fr))] 
+  gap-5
 `);
 export async function getStaticPaths() {
   const res = await client.getEntries({
