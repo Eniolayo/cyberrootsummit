@@ -37,7 +37,10 @@ export default function AboutEvent({
               src={"http://" + eventImage}
               alt="man-in-showing-expertise"
               fill
-              className=" rounded-br-large "
+              className="rounded-br-large"
+              style={{
+                objectFit: "cover",
+              }}
             />
           </div>
         </div>
