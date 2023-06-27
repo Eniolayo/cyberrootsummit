@@ -3,13 +3,26 @@ import React from "react";
 
 import { Footer, Header } from "@/components";
 import { IntroContent } from "@/components/Home";
-import ExampleEvents from "@/components/Home/ExampleEvents";
+import EventsSample from "@/components/Home/ExampleEvents";
 import { client } from "@/utils";
 import UseShowTopBtn from "@/utils/useShowTopBtn";
 
 export default function Home({ posts }) {
   const [showTopBtn, setShowTopBtn] = UseShowTopBtn();
+  const [upcomingEvents, setUpcomingEvents] = React.useState([]);
+  const [pastEvents, setPastEvents] = React.useState([]);
+
   console.log(posts, "postss");
+
+  React.useEffect(() => {
+    setPastEvents(() =>
+      posts.filter((each) => each.metadata.tags[0].sys.id === "finished")
+    );
+    setUpcomingEvents(() =>
+      posts.filter((each) => each.metadata.tags[0].sys.id === "unfinished")
+    );
+  }, [posts]);
+
   // React.useEffect(() => {
   //   const contentType = "summit";
   //   const filterParameters = "fields.eventName=testing";
@@ -18,7 +31,6 @@ export default function Home({ posts }) {
   //     const data = await fetchContentfulData(contentType, filterParameters);
   //     console.log(data);
   //   }
-  //   hill();
   // }, []);
 
   return (
@@ -27,10 +39,14 @@ export default function Home({ posts }) {
         <Header />
         <IntroContent />
         <section className="py-10 w-[92%] max-w-[1500px] mx-auto space-y-6">
-          <h3 className="capitalize text-3xl font-bold">upcoming events</h3>
-          <ExampleEvents />
-          <h3 className="capitalize text-3xl font-bold">past events</h3>
-          <ExampleEvents />
+          <div>
+            <h3 className="capitalize text-3xl font-bold">upcoming events</h3>
+            <EventsSample data={upcomingEvents} finished={false} />
+          </div>
+          <div>
+            <h3 className="capitalize text-3xl font-bold">past events</h3>
+            <EventsSample data={pastEvents} finished={true} />
+          </div>
         </section>
         <Footer />
       </main>
@@ -58,6 +74,7 @@ const fetchContentfulData = async (contentType, filterParameters) => {
     return null;
   }
 };
+
 export async function getStaticProps() {
   const res = await client.getEntries({
     content_type: "summit",

@@ -8,7 +8,6 @@ import ExpertAdvice from "@/components/expertadvice";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { IntroContent } from "@/components/Home";
-import { Text } from "@/components/ui";
 import convertTime from "@/utils/convertTime";
 
 const client = contentful.createClient({
@@ -20,9 +19,12 @@ const client = contentful.createClient({
 export default function Events({ postRes }) {
   console.log(postRes, "postRes");
   const eventDate = new Date(postRes.fields.dateAndTime);
+  const [pastEvents, setPastEvents] = React.useState([]);
 
   const dateFormatter = new Intl.DateTimeFormat("en-US", { dateStyle: "full" });
-
+  React.useEffect(() => {
+    setPastEvents(postRes.metadata.tags[0].sys.id === "finished");
+  }, [postRes]);
   return (
     <div>
       <Header />
@@ -36,20 +38,23 @@ export default function Events({ postRes }) {
         endTime={convertTime(postRes.fields.endDateAndTime.slice(11, 16))}
         eventImage={postRes.fields.eventImage.fields.file.url.slice(2)}
       />
-      <SpeakerSection data={postRes.fields.speakers} />
+      {pastEvents && <SpeakerSection data={postRes.fields.speakers} />}
       <section className="mb-6 flex">
-        <Link
-          href={"/gallery/1pTFVCZgEXLzdaeK22E5NE"}
-          className="text-center w-fit mx-auto block border border-brightNavyBlue text-brightNavyBlue px-6 py-3 rounded-m"
-        >
-          View Gallery
-        </Link>
-        <Link
-          href={"/events/register/1pTFVCZgEXLzdaeK22E5NE"}
-          className="text-center w-fit mx-auto block border border-brightNavyBlue text-brightNavyBlue px-6 py-3 rounded-m"
-        >
-          Register For Event
-        </Link>
+        {pastEvents ? (
+          <Link
+            href={`/gallery/${postRes.sys.id}`}
+            className="text-center w-fit mx-auto block border border-brightNavyBlue text-brightNavyBlue px-6 py-3 rounded-m"
+          >
+            View Gallery
+          </Link>
+        ) : (
+          <Link
+            href={`/events/register/${postRes.sys.id}`}
+            className="text-center w-fit mx-auto block border border-brightNavyBlue text-brightNavyBlue px-6 py-3 rounded-m"
+          >
+            Register For Event
+          </Link>
+        )}
       </section>
       <ExpertAdvice />
       <EventSponsors />
