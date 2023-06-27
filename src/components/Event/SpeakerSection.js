@@ -13,20 +13,27 @@ export default function SpeakerSection({ data = [] }) {
             name={item.fields.name}
             img={item.fields.speakerImage.fields.file.url.slice(2)}
             title={item.fields.speakersTitle}
+            topic={item.fields.topic}
           />
         ))}
       </div>
     </section>
   );
 }
-function Speakers({ name, img, title }) {
+function Speakers({ name, img, title, topic }) {
+  console.log(topic);
   return (
-    <div>
-      <div className="relative w-[300px] h-[330px]">
+    <div className="text-center ">
+      <div className="relative w-[330px] h-[330px]">
         <Image src={"http://" + img} alt={title} fill />
       </div>
-      <h5 className="text-brightNavyBlue capitalize mt-4">{name}</h5>
-      <p className="capitalize text-xl italic">{title}</p>
+      <h5 className="text-brightNavyBlue capitalize text-2xl max-w-[295px] mx-auto mt-4">
+        {name}
+      </h5>
+      <p className="capitalize text-xl mt-1 max-w-[295px] mx-auto">{title}</p>
+      <p className="capitalize text-base font-normal max-w-[295px] mx-auto mt-1">
+        {topic}
+      </p>
     </div>
   );
 }

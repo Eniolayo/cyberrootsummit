@@ -1,12 +1,9 @@
 import axios from "axios";
-import Head from "next/head";
 import React from "react";
 
-import Footer from "@/components/footer";
-import Header from "@/components/header";
+import { Footer, Header } from "@/components";
 import { IntroContent } from "@/components/Home";
 import ExampleEvents from "@/components/Home/ExampleEvents";
-import { Heading } from "@/components/ui";
 import { client } from "@/utils";
 import UseShowTopBtn from "@/utils/useShowTopBtn";
 
