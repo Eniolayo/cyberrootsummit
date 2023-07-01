@@ -48,16 +48,24 @@ export default function Events({ postRes }) {
             View Gallery
           </Link>
         ) : (
-          <Link
-            href={`/events/register/${postRes.sys.id}`}
-            className="text-center w-fit mx-auto block border border-brightNavyBlue text-brightNavyBlue px-6 py-3 rounded-m"
-          >
-            Register For Event
-          </Link>
+          <div className="flex justify-between w-full">
+            <Link
+              href={`/events/register/${postRes.sys.id}`}
+              className="text-center w-fit mx-auto block border border-brightNavyBlue text-brightNavyBlue px-6 py-3 rounded-m"
+            >
+              Register For Event
+            </Link>
+            <Link
+              href={`/events/sponsor/${postRes.sys.id}`}
+              className="text-center w-fit mx-auto block border bg-brightNavyBlue text-white px-6 py-3 rounded-m"
+            >
+              Sponsor Registration
+            </Link>
+          </div>
         )}
       </section>
       <ExpertAdvice />
-      <EventSponsors />
+      {/* <EventSponsors /> */}
       <Footer />
     </div>
   );

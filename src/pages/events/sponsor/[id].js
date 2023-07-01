@@ -12,8 +12,8 @@ const client = contentful.createClient({
   accessToken: process.env.NEXT_PUBLIC_ACCESSTOKEN,
 });
 
-export default function EventId({ postRes }) {
-  console.log(postRes, "postRes");
+export default function SponsorId({ postRes }) {
+  // console.log(postRes, "postRes");
   return (
     <div>
       <Header />
@@ -56,6 +56,15 @@ export default function EventId({ postRes }) {
                 className="block text-brightNavyBlue"
               >
                 Phone Number
+              </label>
+              <input type="text" className={inputStyles} />
+            </div>
+            <div className="space-y-1">
+              <label
+                htmlFor="company name"
+                className="block text-brightNavyBlue"
+              >
+                Company Name
               </label>
               <input type="text" className={inputStyles} />
             </div>

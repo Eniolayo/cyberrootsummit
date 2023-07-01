@@ -15,14 +15,19 @@ export default function EventsSample({ data, finished }) {
           <h5 className="uppercase font-bold text-2xl">
             {item.fields.eventName}
           </h5>
-          <h6 className="text-lg">10-09-2023</h6>
+          <h6 className="text-lg">{item.fields.dateAndTime.slice(0, 10)}</h6>
           <p className="text-sm max-w-[280px] py-7">
             {item.fields.description.slice(0, 200)}
             {item.fields.description.length > 200 ? "..." : ""}
           </p>
-          {/* <button className="border border-white text-base rounded-lg px-2 py-1">
+          {!finished && (
+            <Link
+              href={`/events/register/${item.sys.id}`}
+              className="border border-white text-base rounded-lg px-2 py-1"
+            >
               Register for free
-            </button> */}
+            </Link>
+          )}
         </Link>
       ))}
     </div>

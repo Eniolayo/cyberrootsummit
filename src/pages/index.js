@@ -48,7 +48,7 @@ function EventSection({ upcomingEvents, pastEvents }) {
     <section className="py-10 w-[92%] max-w-[1500px] mx-auto space-y-6">
       {[
         { title: "upcoming events", data: upcomingEvents, finished: false },
-        { title: "upcoming events", data: pastEvents, finished: true },
+        { title: "past events", data: pastEvents, finished: true },
       ].map(({ title, data, finished }) => (
         <div key={title}>
           <h3 className="capitalize text-3xl font-bold">{title}</h3>
