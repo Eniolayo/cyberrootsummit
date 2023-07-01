@@ -5,14 +5,12 @@ import { Footer, Header } from "@/components";
 import { IntroContent } from "@/components/Home";
 import EventsSample from "@/components/Home/ExampleEvents";
 import { client } from "@/utils";
-import UseShowTopBtn from "@/utils/useShowTopBtn";
 
 export default function Home({ posts }) {
-  const [showTopBtn, setShowTopBtn] = UseShowTopBtn();
   const [upcomingEvents, setUpcomingEvents] = React.useState([]);
   const [pastEvents, setPastEvents] = React.useState([]);
 
-  console.log(posts, "postss");
+  // console.log(posts, "postss");
 
   React.useEffect(() => {
     setPastEvents(() =>
@@ -38,19 +36,26 @@ export default function Home({ posts }) {
       <main>
         <Header />
         <IntroContent />
-        <section className="py-10 w-[92%] max-w-[1500px] mx-auto space-y-6">
-          <div>
-            <h3 className="capitalize text-3xl font-bold">upcoming events</h3>
-            <EventsSample data={upcomingEvents} finished={false} />
-          </div>
-          <div>
-            <h3 className="capitalize text-3xl font-bold">past events</h3>
-            <EventsSample data={pastEvents} finished={true} />
-          </div>
-        </section>
+        <EventSection upcomingEvents={upcomingEvents} pastEvents={pastEvents} />
         <Footer />
       </main>
     </>
+  );
+}
+
+function EventSection({ upcomingEvents, pastEvents }) {
+  return (
+    <section className="py-10 w-[92%] max-w-[1500px] mx-auto space-y-6">
+      {[
+        { title: "upcoming events", data: upcomingEvents, finished: false },
+        { title: "upcoming events", data: pastEvents, finished: true },
+      ].map(({ title, data, finished }) => (
+        <div key={title}>
+          <h3 className="capitalize text-3xl font-bold">{title}</h3>
+          <EventsSample data={data} finished={finished} />
+        </div>
+      ))}
+    </section>
   );
 }
 
