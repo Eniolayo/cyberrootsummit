@@ -5,7 +5,7 @@ import { Heading, Text } from "./ui";
 
 export default function IntroContent() {
   return (
-    <section className="bg-summit-gallery-bg bg-cover bg-no-repeat py-5 h-[80vh]">
+    <section className="bg-summit-gallery-bg bg-cover bg-slate-900 bg-no-repeat py-5 h-[80vh]">
       <div className="grid items-center h-full text-white content-center gap-5 [&>*]:mx-auto [&>*]:text-center w-[90%] mx-auto">
         <Heading level={"h2"} variant={"3xl"} styles={"font-black"}>
           gallery
