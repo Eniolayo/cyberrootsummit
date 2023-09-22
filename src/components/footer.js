@@ -8,13 +8,15 @@ export default function Footer() {
   return (
     <footer>
       <div className="flex gap-10 flex-wrap lg:justify-between flex-col md:flex-row items-start py-10 w-[92%] max-w-[1500px] mx-auto">
-        <Image
-          src="/CyberRoot Logo.png"
-          alt="cyberroot Icon"
-          width={200}
-          height={49}
-          style={{ cursor: "pointer" }}
-        />
+        <Link href="https://www.cyberrootltd.com/">
+          <Image
+            src="/CyberRoot Logo.png"
+            alt="cyberroot Icon"
+            width={200}
+            height={49}
+            style={{ cursor: "pointer" }}
+          />
+        </Link>
         <AboutUsSection />
         <NewsAndEvents />
         <ContactAndLegal />
@@ -35,7 +37,7 @@ export default function Footer() {
         </Heading>
         <ul>
           <li className="underline mb-1 max-w-[210px]">
-            <Link href={"/"}>
+            <Link href={HOME}>
               Adamolekun Estate, Adebayo Old Takeaway, 360102, Ado Ekiti, Ekiti
             </Link>
           </li>
@@ -55,14 +57,26 @@ export default function Footer() {
         </Heading>
         <ul className="flex gap-1">
           {[
-            "ic:sharp-facebook",
-            "mdi:twitter",
-            "ph:instagram-logo-fill",
-            "ph:youtube-logo-fill",
+            {
+              icon: "ic:sharp-facebook",
+              link: "https://web.facebook.com/CyberrootNg/?_rdc=1&_rdr",
+            },
+            {
+              icon: "ph:instagram-logo-fill",
+              link: "https://www.instagram.com/cyberrootltd/?hl=en",
+            },
+            {
+              icon: "mdi:twitter",
+              link: "https://twitter.com/cyberrootltd?lang=en",
+            },
+            {
+              icon: "ph:youtube-logo-fill",
+              link: "https://www.youtube.com/@cyberrootltd",
+            },
           ].map((item) => (
             <li key={item}>
-              <Link href="/">
-                <Icon icon={item} color="#146BDF" fontSize={"30px"} />
+              <Link href={HOME}>
+                <Icon icon={item.icon} color="#146BDF" fontSize={"30px"} />
               </Link>
             </li>
           ))}
@@ -84,7 +98,7 @@ export default function Footer() {
         <ul>
           {["Privacy Policy", "Terms and Conditions"].map((item) => (
             <li key={item}>
-              <Link href={"/"} className="underline mb-1">
+              <Link href={HOME} className="underline mb-1">
                 {item}
               </Link>
             </li>
@@ -106,7 +120,7 @@ export default function Footer() {
         <ul>
           {AboutUs.map((item) => (
             <li key={item.name}>
-              <Link className="underline mb-1" href={"/"}>
+              <Link className="underline mb-1" href={item.link} target="_blank">
                 {item.name}
               </Link>
             </li>
@@ -127,11 +141,11 @@ export default function Footer() {
         </Heading>
         <ul>
           {[
-            { name: "Blog", link: "/" },
-            { name: "Events", link: "/" },
+            { name: "Blog", link: BLOG },
+            { name: "Events", link: CYBERROOTSUMMIT },
           ].map((item) => (
             <li key={item.name}>
-              <Link href={"/"} className="underline mb-1">
+              <Link href={item.link} className="underline mb-1" target="_blank">
                 {item.name}
               </Link>
             </li>
@@ -142,7 +156,7 @@ export default function Footer() {
   }
 }
 const AboutUs = [
-  { name: "Home", link: "/" },
-  { name: "About Us", link: "/" },
-  { name: "Services", link: "/" },
+  { name: "Home", link: "cyberrootltd.com/" },
+  { name: "About Us", link: "cyberrootltd.com/about-us" },
+  { name: "Services", link: "cyberrootltd.com/services/threat-assessment" },
 ];
