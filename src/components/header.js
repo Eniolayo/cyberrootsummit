@@ -50,7 +50,7 @@ export default function Header() {
         />
       </Head>
       <div className={HeaderWrapperStyle}>
-        <Link href="/">
+        <Link href="https://www.cyberrootltd.com/">
           <Image
             src="/CyberRoot Logo.png"
             alt="cyberroot Icon"
@@ -61,7 +61,7 @@ export default function Header() {
         <div className={HeaderLinkStyle(isOpen)}>
           <ul className={HeaderWrapperLinkStyle}>
             {[
-              { name: "training", url: "/training" },
+              // { name: "training", url: "/training" },
               { name: "blog", url: "https://www.cyberrootltd.com/blog" },
               { name: "gallery", url: "/gallery" },
             ].map((item) => (
@@ -69,12 +69,15 @@ export default function Header() {
                 className="text-base m:text-lg lg:text-xl text-white m:text-black capitalize"
                 key={item.name}
               >
-                <Link href={item.url}>{item.name}</Link>
+                <Link href={item.url} target="_blank">
+                  {item.name}
+                </Link>
               </li>
             ))}
           </ul>
           <Link
             href={"/contact-us"}
+            target="_blank"
             className="mt-5 m:mt-0 px-8 py-3 text-base m:text-lg lg:text-xl block w-fit bg-brightNavyBlue text-white rounded-m"
           >
             Contact Us
